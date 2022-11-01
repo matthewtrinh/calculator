@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator">
+        <div class="display">0</div>
+        <div id="top">
+            <button id="clear">Clear</button>
+            <button id="delete">Delete</button>
+        </div>
+        <div class="numbers">
+            <div>
+                <button id="seven">7</button>
+                <button id="eight">8</button>
+                <button id="nine">9</button>
+                <button id="divide" class="operate">/</button>
+            </div>
+            <div>
+                <button id="four">4</button>
+                <button id="five">5</button>
+                <button id="six">6</button>
+                <button id="multiply" class="operate">x</button>
+            </div>
+            <div>
+                <button id="one">1</button>
+                <button id="two">2</button>
+                <button id="three">3</button>
+                <button id="subtract" class="operate">-</button>
+            </div>
+            <div>
+                <button>+/-</button>
+                <button id="zero">0</button>
+                <button>.</button>
+                <button id="add" class="operate">+</button>
+            </div>
+        </div>
+        <button id="equals">=</button>
+    </div>
+    <script>
+        let operation = "None";
+        let firstNum = 0;
+        let erase = false;
+
+        // Clear Display
+        const clear = document.querySelector(`#clear`);
+        clear.addEventListener('click', clearDisplay);
+
+        function clearDisplay(event) {
+            const display = document.querySelector(`.display`);
+            display.textContent = "0";
+            firstNum = 0;
+            operation = "None";
+        }
+
+        // Display Number
+        const buttons = document.querySelectorAll(`.numbers div  button`);
+        buttons.forEach(button => button.addEventListener('click', displayNumber));
+
+        function displayNumber(event) {
+            const num = document.querySelector(`#${event.target.id}`).textContent;
+            const display = document.querySelector(`.display`);
+            if(display.textContent === "0" || erase === true) {
+                display.textContent = num;
+                erase = false;
+            } else {
+                display.textContent += num;
+            }
+        }
+
+        // Gets first number and operation
+        const operators = document.querySelectorAll(`.operate`);
+        operators.forEach(op => op.addEventListener('click', logFirstNumAndOp));
+
+        function logFirstNumAndOp(event) {
+            const displayText = document.querySelector(`.display`).textContent;
+            operation = displayText[displayText.length-1];
+            firstNum = Number(displayText.substring(0,displayText.length-1));
+            console.log(operation);
+            console.log(firstNum);
+        }
+
+        // Gets second number and calculates
+        const equals = document.querySelector(`#equals`);
+        equals.addEventListener('click', calculate);
+
+        function calculate(event) {
+            const display = document.querySelector(`.display`);
+            secondNum = Number(display.textContent.split(operation)[1]);
+            display.textContent = operate(operation, firstNum, secondNum);
+            erase = true;
+        }
+
+        // Operation Logic
+        function add(a,b) {
+            return a + b;
+        }
+
+        function subtract(a,b) {
+            return a - b;
+        }
+
+        function multiply(a,b) {
+            return a * b;
+        }
+
+        function divide(a,b) {
+            return a / b;
+        }
+
+        function operate(operator, a, b) {
+            switch(operator) {
+                case "+":
+                    return add(a,b);
+                case "-":
+                    return subtract(a,b);
+                case "x":
+                    return multiply(a,b);
+                case "/":
+                    return divide(a,b);
+                default:
+                    return "Operator Error"
+            }
+        }
+
+    </script>
+</body>
+</html>
