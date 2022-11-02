@@ -1,15 +1,23 @@
+
 body {
     display: flex;
     justify-content: center;
-    margin-top: 15vh;
+    margin-top: 25vh;
+    background-image: url(https://img.freepik.com/free-photo/workspace-with-office-supplies-top-view_144627-32586.jpg?w=740&t=st=1667361010~exp=1667361610~hmac=9781672ca541dfdcb2cdc2d9343169862854fe7eb9a248f98b611660aeb2ade8);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
 }
 .calculator {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: lightslategrey;
-    padding: 30px;
-    box-shadow: 10px 10px 10px darkgray;
+    background-color: rgb(18, 21, 24);
+    padding: 40px;
+    box-shadow: 8px 10px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    height: fit-content;
 }
 
 #top {
@@ -35,6 +43,9 @@ button {
     background-color: lavender;
     font-size: 20px;
 }
+button:hover {
+    background-color: rgba(230, 230, 250, 0.7);
+}
 
 
 .numbers div {
@@ -49,5 +60,7 @@ button {
 
 #equals {
     width: 210px;
-    background-color: dodgerblue;
+}
+#equals:hover {
+    background-color: rgba(30, 143, 255, 0.6);
 }
